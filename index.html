@@ -3,14 +3,78 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Sausage Therapy Till — pay, book, keep the pack alive</title>
+  <title>Sausage Therapy Till</title>
   <meta name="theme-color" content="#0c0a08" />
+  <style>
+    :root{--bg:#0c0a08;--card:#16120e;--gold:#e4b86a;--gold2:#f3d7a4;--ink:#f6efe4;--muted:#b9aa96;--line:rgba(228,184,106,.22)}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:#0c0a08;color:var(--ink);font-family:system-ui,sans-serif}
+    .wrap{max-width:920px;margin:0 auto;padding:28px 18px 80px}
+    .kicker{letter-spacing:.2em;text-transform:uppercase;font-size:11px;color:var(--gold);font-weight:600}
+    h1{font-size:clamp(36px,7vw,56px);line-height:.95;margin:10px 0 12px}
+    h1 em{font-style:italic;color:var(--gold)}
+    .lede{color:var(--muted);max-width:560px;line-height:1.55}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:26px 0}
+    .offer{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:8px}
+    .offer b{font-size:34px;color:var(--gold2)}
+    .offer p{color:var(--muted);font-size:14px;line-height:1.45;flex:1}
+    .btn{display:block;text-align:center;text-decoration:none;background:linear-gradient(180deg,#f0d48a,#c9894a);color:#1a1208;font-weight:700;padding:13px 14px;border-radius:12px;font-size:14px;border:0;cursor:pointer;width:100%}
+    .paybox{background:var(--card);border:1px dashed var(--line);border-radius:18px;padding:18px;margin:8px 0 24px}
+    .mono{font-family:ui-monospace,Menlo,monospace;color:var(--gold2);word-break:break-all}
+    .toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#16351c;color:#9ad0a0;padding:10px 16px;border-radius:999px;display:none;font-weight:600}
+    @media(max-width:700px){.grid{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
-  <p>VAULT 500 seed is PayID only.</p>
-  <p>PayID: emilybluerichards@gmail.com</p>
-  <p>Amount: A$500.00</p>
-  <p>Reference: VAULT500</p>
-  <p>Do not use PayPal for this seed.</p>
+  <main class="wrap">
+    <div class="kicker">Live till · PayPal gremlins bypassed on VAULT 500</div>
+    <h1>Pay the pack.<br><em>Keep the work alive.</em></h1>
+    <p class="lede">VAULT 500 seed is PayID only. Do not open PayPal for A$500.</p>
+    <div class="grid">
+      <article class="offer">
+        <b>A$8</b>
+        <h2>Shout a schooner</h2>
+        <p>Smallest honest unit. PayID preferred if PayPal misbehaves.</p>
+        <button class="btn" type="button" id="c8">Copy PayID A$8 SAUSAGE</button>
+      </article>
+      <article class="offer">
+        <b>A$29</b>
+        <h2>Field Pack</h2>
+        <p>Email FIELD_PACK.md after the receipt lands.</p>
+        <button class="btn" type="button" id="c29">Copy PayID A$29 FIELDPACK</button>
+      </article>
+      <article class="offer">
+        <b>A$90</b>
+        <h2>Session deposit</h2>
+        <p>Holds one hour.</p>
+        <button class="btn" type="button" id="c90">Copy PayID A$90 SESSION</button>
+      </article>
+      <article class="offer">
+        <b>A$500</b>
+        <h2>VAULT 500 seed</h2>
+        <p>PayPal is gremlins. Bank app → PayID → emilybluerichards@gmail.com → A$500.00 → reference VAULT500.</p>
+        <button class="btn" type="button" id="copy500">Copy PayID + A$500 + VAULT500</button>
+      </article>
+    </div>
+    <div class="paybox">
+      <div class="kicker">Zero-cut PayID</div>
+      <div class="mono">emilybluerichards@gmail.com</div>
+      <button class="btn" type="button" id="copy" style="margin-top:12px">Copy PayID</button>
+    </div>
+  </main>
+  <div class="toast" id="toast">Copied</div>
+  <script>
+    const toast=document.getElementById('toast');
+    const pay='emilybluerichards@gmail.com';
+    async function copyText(t,m){
+      try{await navigator.clipboard.writeText(t);toast.textContent=m;toast.style.display='block';setTimeout(()=>toast.style.display='none',1800)}
+      catch(e){toast.textContent='PayID is on screen';toast.style.display='block'}
+    }
+    document.getElementById('copy').onclick=()=>copyText(pay,'PayID copied');
+    document.getElementById('copy500').onclick=()=>copyText('PayID '+pay+'\nAmount A$500.00\nReference VAULT500','VAULT500 copied');
+    document.getElementById('c8').onclick=()=>copyText('PayID '+pay+'\nAmount A$8.00\nReference SAUSAGE','A$8 copied');
+    document.getElementById('c29').onclick=()=>copyText('PayID '+pay+'\nAmount A$29.00\nReference FIELDPACK','A$29 copied');
+    document.getElementById('c90').onclick=()=>copyText('PayID '+pay+'\nAmount A$90.00\nReference SESSION','A$90 copied');
+  </script>
 </body>
 </html>
